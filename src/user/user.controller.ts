@@ -23,6 +23,6 @@ export class UserController{
         const fieldArray = fields ? fields.split(',') : undefined;
         return this.userService.findOne(id, fieldArray);
       }
-
+//
 }
 
