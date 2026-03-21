@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { IUser } from './user.interface';
-
 import * as fs from 'fs';
+import * as path from 'path';
+
 @Injectable()
 export class UserService{
     test(): any[] {
@@ -9,8 +10,8 @@ export class UserService{
     }
 
     findAll(): IUser[] {
-        const data = fs.readFileSync('./data/users.json', 'utf8');
-        const users = JSON.parse(data);
-        return users;
+        const filePath = path.join(process.cwd(), 'data', 'users.json');
+        const raw = fs.readFileSync(filePath, 'utf-8');
+        return JSON.parse(raw) as IUser[];
     }
 }
