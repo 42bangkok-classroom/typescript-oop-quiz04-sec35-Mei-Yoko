@@ -1,8 +1,8 @@
 import { Injectable,NotFoundException } from '@nestjs/common';
 import { IUser } from './user.interface';
+import { CreateUserDto } from './dto/create-user.dto';
 import * as fs from 'fs';
 import * as path from 'path';
-import { error } from 'console';
 
 @Injectable()
 export class UserService{
@@ -12,8 +12,8 @@ export class UserService{
 
     findAll(): IUser[] {
         const filePath = path.join(process.cwd(), 'data', 'users.json');
-        const raw = fs.readFileSync(filePath, 'utf-8');
-        return JSON.parse(raw) as IUser[];
+        const read = fs.readFileSync(filePath, 'utf-8');
+        return JSON.parse(read) as IUser[];
     }
 
    findOne(id: string, fields?: string[]): Partial<IUser>{
@@ -47,5 +47,7 @@ export class UserService{
             }
             return result;
         }
+
     }
+
 
